@@ -10,16 +10,22 @@ import SwiftUI
 struct WelcomeTasksView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var showTaskInputs = false
+    @State private var showLockedIn = false
     @State private var task1 = ""
     @State private var task2 = ""
     @State private var task3 = ""
     
     var body: some View {
-        ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            VStack(spacing: 0) {
+        Group {
+            if showLockedIn {
+                LockedInView(tasks: [task1, task2, task3].filter { !$0.isEmpty })
+                    .environmentObject(authManager)
+            } else {
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
+                    
+                    VStack(spacing: 0) {
                 Spacer()
                 
                 VStack(spacing: 32) {
@@ -67,6 +73,8 @@ struct WelcomeTasksView: View {
                 continueButton
                     .padding(.horizontal, 24)
                     .padding(.bottom, 40)
+                    }
+                }
             }
         }
     }
@@ -98,8 +106,10 @@ struct WelcomeTasksView: View {
                     showTaskInputs = true
                 }
             } else {
-                // Handle task submission
-                authManager.showWelcomeTasks = false
+                // Show locked in page
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showLockedIn = true
+                }
             }
         } label: {
             Text("Continue")

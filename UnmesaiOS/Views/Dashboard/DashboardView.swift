@@ -54,6 +54,12 @@ struct DashboardView: View {
             }
             
             ZStack {
+                Image("bluelight")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 350)
+                    .offset(y: 0)
+                
                 Image("lock")
                     .resizable()
                     .scaledToFit()

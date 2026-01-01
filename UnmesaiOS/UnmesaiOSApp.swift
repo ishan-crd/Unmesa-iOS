@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct UnmesaiOSApp: App {
     @StateObject private var authManager = AuthManager()
+    @StateObject private var taskManager = TaskManager()
     
     init() {
         // Register fonts programmatically
@@ -37,6 +38,7 @@ struct UnmesaiOSApp: App {
         WindowGroup {
             SplashView()
                 .environmentObject(authManager)
+                .environmentObject(taskManager)
                 .preferredColorScheme(.dark)
         }
     }

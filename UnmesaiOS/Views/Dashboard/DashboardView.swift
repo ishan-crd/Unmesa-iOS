@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @EnvironmentObject var taskManager: TaskManager
     @State private var selectedTab = 0
     @State private var timeRemaining = ""
+    @State private var hours: Int = 0
+    @State private var minutes: Int = 0
+    
+    init() {
+        // Load tasks on init
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -46,24 +53,42 @@ struct DashboardView: View {
                     .frame(height: height / 2)
             }
             
-            VStack(spacing: 16) {
+            ZStack {
                 Image("lock")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200)
+                    .frame(width: 220)
                 
                 VStack(spacing: 4) {
-                    Text("Closes in")
-                        .font(.system(size: 12))
-                        .foregroundColor(.white)
-                    Text(timeRemaining)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
+                    // Text("Closes in")
+                    //     .font(.system(size: 12))
+                    //     .foregroundColor(.white)
+                    
+                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        Text("\(hours)")
+                            .font(.geistSemiBold(size: 26.5))
+                            .foregroundColor(.white)
+                        Text("h")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                        
+                        Text("\(minutes)")
+                            .font(.geistSemiBold(size: 26.5))
+                            .foregroundColor(.white)
+                        Text("m")
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                    }
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(Color(white: 0.15))
-                .cornerRadius(12)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color(hex: "1F1F1F"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 19)
+                        .stroke(Color(hex: "373737"), lineWidth: 1)
+                )
+                .cornerRadius(19)
+                .offset(y: 80)
             }
         }
         .frame(height: height)
@@ -74,24 +99,68 @@ struct DashboardView: View {
             Color.black
                 .cornerRadius(33, corners: [.topLeft, .topRight])
             
-            VStack(spacing: 0) {
-                Text("TODAY'S RULE")
-                    .font(.system(size: 12))
-                    .foregroundColor(Color(hex: "4A9EFF"))
+            ScrollView {
+                VStack(spacing: 0) {
+                    Text("TODAY'S RULE")
+                        .font(.neuePlakExtendedSemiBold(size: 14))
+                        .foregroundColor(Color(hex: "4A9EFF"))
+                        .padding(.top, 32)
+                    
+                    Text("Focus on the essential.")
+                        .font(.geistSemiBold(size: 26.5))
+                        .foregroundColor(.white)
+                        .padding(.top, 8)
+                    
+                    Text("Why this day matters")
+                        .font(.montserratRegular(size: 14))
+                        .foregroundColor(Color(hex: "B6B6B6"))
+                        .padding(.top, 4)
+                    
+                    VStack(spacing: 12) {
+                        ForEach(Array(taskManager.todayTasks.enumerated()), id: \.offset) { index, task in
+                            taskRow(task: task)
+                        }
+                    }
+                    .padding(.horizontal, 24)
                     .padding(.top, 32)
-                
-                Text("Focus on the essential.")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.top, 8)
-                
-                Text("Why this day matters")
-                    .font(.system(size: 14))
-                    .foregroundColor(.white)
-                    .padding(.top, 4)
+                    
+                    Text("Tonight you'll receive your verdict")
+                        .font(.montserratRegular(size: 13))
+                        .foregroundColor(Color(hex: "B6B6B6"))
+                        .padding(.top, 24)
+                        .padding(.bottom, 20)
+                }
             }
         }
         .frame(height: height)
+    }
+    
+    private func taskRow(task: String) -> some View {
+        HStack(spacing: 12) {
+            Circle()
+                .fill(Color(hex: "1F2937"))
+                .frame(width: 20, height: 20)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(task)
+                    .font(.system(size: 14))
+                    .foregroundColor(.white)
+                
+                Text("Complete by 10pm")
+                    .font(.montserratRegular(size: 12))
+                    .foregroundColor(Color(hex: "B6B6B6"))
+            }
+            
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 16)
+        .background(Color(hex: "121212"))
+        .overlay(
+            RoundedRectangle(cornerRadius: 21)
+                .stroke(Color(hex: "1F2937"), lineWidth: 1)
+        )
+        .cornerRadius(21)
     }
     
     private var bottomNavBar: some View {
@@ -151,8 +220,8 @@ struct DashboardView: View {
     
     private func setTimeRemaining(to date: Date) {
         let components = Calendar.current.dateComponents([.hour, .minute], from: Date(), to: date)
-        let hours = components.hour ?? 0
-        let minutes = components.minute ?? 0
+        hours = components.hour ?? 0
+        minutes = components.minute ?? 0
         timeRemaining = "\(hours)h \(minutes)m"
     }
 }

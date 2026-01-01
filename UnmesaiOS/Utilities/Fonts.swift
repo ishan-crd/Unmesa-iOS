@@ -66,5 +66,23 @@ extension Font {
         // Fallback
         return .system(size: size)
     }
+    
+    static func neuePlakExtendedSemiBold(size: CGFloat) -> Font {
+        let fontNames = [
+            FontLoader.getFontName(for: "Neue Plak Extended SemiBold") ?? "",
+            "Neue Plak Extended SemiBold",
+            "Neue Plak Extended",
+            "Neue Plak"
+        ].filter { !$0.isEmpty }
+        
+        for fontName in fontNames {
+            if let font = UIFont(name: fontName, size: size) {
+                return Font(font)
+            }
+        }
+        
+        // Fallback
+        return .system(size: size, weight: .semibold)
+    }
 }
 

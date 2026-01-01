@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LockedInView: View {
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var taskManager: TaskManager
     let tasks: [String]
     
     var body: some View {
@@ -85,6 +86,7 @@ struct LockedInView: View {
     
     private var gotItButton: some View {
         Button {
+            taskManager.setTasks(tasks)
             authManager.showWelcomeTasks = false
             authManager.showDashboard = true
         } label: {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeTasksView: View {
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var taskManager: TaskManager
     @State private var showTaskInputs = false
     @State private var showLockedIn = false
     @State private var task1 = ""
@@ -20,6 +21,7 @@ struct WelcomeTasksView: View {
             if showLockedIn {
                 LockedInView(tasks: [task1, task2, task3].filter { !$0.isEmpty })
                     .environmentObject(authManager)
+                    .environmentObject(taskManager)
             } else {
                 ZStack {
                     Color.black

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var taskManager: TaskManager
     @State private var isActive = false
     @State private var opacity = 0.0
     
@@ -35,6 +36,7 @@ struct SplashView: View {
                 // Direct to login for now - will navigate to onboarding after login
                 if authManager.showDashboard {
                     DashboardView()
+                        .environmentObject(taskManager)
                         .transition(.opacity)
                 } else if authManager.showOnboarding {
                     OnboardingView()
@@ -44,6 +46,7 @@ struct SplashView: View {
                 } else if authManager.showWelcomeTasks {
                     WelcomeTasksView()
                         .environmentObject(authManager)
+                        .environmentObject(taskManager)
                         .transition(.opacity)
                 } else {
                     LoginView()

@@ -13,6 +13,7 @@ struct FontLoader {
         registerFont(named: "Geist-SemiBold")
         registerFont(named: "Montserrat-SemiBold")
         registerFont(named: "Montserrat-Regular")
+        registerFont(named: "Neue Plak Extended SemiBold")
     }
     
     private static func registerFont(named fontName: String) {

@@ -11,9 +11,12 @@ import Foundation
 final class AuthManager: ObservableObject {
     @Published var isLoggedIn = false
     @Published var showOnboarding = false
+    @Published var showWelcomeTasks = false
     
     init() {
         checkLoginStatus()
+        // Onboarding check commented out - will be set on login
+        // showOnboarding = false
     }
     
     private func checkLoginStatus() {
@@ -25,11 +28,12 @@ final class AuthManager: ObservableObject {
         isLoggedIn = true
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
         
-        // Check if onboarding is complete
-        let onboardingComplete = UserDefaults.standard.bool(forKey: "onboardingComplete")
-        if !onboardingComplete {
-            showOnboarding = true
-        }
+        // Onboarding check commented out - always show onboarding for now
+        // let onboardingComplete = UserDefaults.standard.bool(forKey: "onboardingComplete")
+        // if !onboardingComplete {
+        //     showOnboarding = true
+        // }
+        showOnboarding = true
     }
     
     func logout() {

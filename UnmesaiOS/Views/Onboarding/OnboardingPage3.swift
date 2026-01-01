@@ -17,13 +17,12 @@ struct OnboardingPage3: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
-            
             VStack(spacing: 24) {
                 titleSection
                 optionsList
             }
             .padding(.horizontal, 24)
+            .padding(.top, 8)
             
             Spacer()
             
@@ -70,7 +69,7 @@ struct OnboardingPage3: View {
                     
                     if isSelected {
                         Circle()
-                            .fill(Color(hex: "4C4C4C"))
+                            .fill(Color.white)
                             .frame(width: 12, height: 12)
                     }
                 }
@@ -94,8 +93,10 @@ struct OnboardingPage3: View {
     
     private var finishButton: some View {
         Button(action: {
-            onboardingManager.completeOnboarding()
+            // Onboarding completion commented out for now
+            // onboardingManager.completeOnboarding()
             authManager.showOnboarding = false
+            authManager.showWelcomeTasks = true
         }) {
             Text("Finish")
                 .font(.system(size: 16, weight: .semibold))

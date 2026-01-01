@@ -38,6 +38,10 @@ struct SplashView: View {
                         .environmentObject(OnboardingManager())
                         .environmentObject(authManager)
                         .transition(.opacity)
+                } else if authManager.showWelcomeTasks {
+                    WelcomeTasksView()
+                        .environmentObject(authManager)
+                        .transition(.opacity)
                 } else {
                     LoginView()
                         .environmentObject(authManager)

@@ -39,13 +39,14 @@ struct WelcomeTasksView: View {
                     
                     VStack(spacing: 12) {
                         Text("What will make today a win?")
-                            .font(.system(size: 26.24, weight: .semibold))
+                            .font(.system(size: 27.24, weight: .semibold))
                             .foregroundColor(.white)
+                            .tracking(-1.05)
                             .multilineTextAlignment(.center)
                             .offset(y: showTaskInputs ? 0 : 40)
                         
                         Text("Choose 3 tasks. No more. No edits later.")
-                            .font(.system(size: 13))
+                            .font(.system(size: 13.5))
                             .foregroundColor(Color(hex: "B6B6B6"))
                             .multilineTextAlignment(.center)
                             .offset(y: showTaskInputs ? 0 : 40)
@@ -74,7 +75,7 @@ struct WelcomeTasksView: View {
                 
                 continueButton
                     .padding(.horizontal, 24)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 20)
                     }
                 }
             }

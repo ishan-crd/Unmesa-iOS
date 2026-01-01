@@ -18,30 +18,27 @@ struct LoginView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                VStack(spacing: 24) {
-                    titleView
+                Image("meditation")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 650)
+                    .padding(.bottom, 20)
+                
+                VStack(spacing: 12) {
                     buttonsView
                     legalText
                 }
                 .padding(.horizontal, 24)
-                .padding(.bottom, 40)
+                .padding(.top, 0)
+                .padding(.bottom, 10)
             }
         }
     }
     
-    private var titleView: some View {
-        VStack(spacing: 0) {
-            Text("The AI")
-                .font(.geistSemiBold(size: 32))
-            Text("Growth Companion")
-                .font(.geistSemiBold(size: 32))
-        }
-        .foregroundColor(.white)
-        .padding(.bottom, 40)
-    }
-    
     private var buttonsView: some View {
         VStack(spacing: 16) {
+            titleView
+            
             authButton(
                 title: "Continue with Email",
                 icon: "envelope.fill",
@@ -63,6 +60,21 @@ struct LoginView: View {
                 foregroundColor: .black
             )
         }
+    }
+    
+    private var titleView: some View {
+        VStack(spacing: -(38.19 - 36.3)) {
+            Text("The AI")
+                .font(.geistSemiBold(size: 38.19))
+                .tracking(-1.53)
+                .foregroundColor(.white)
+            
+            Text("Growth Companion")
+                .font(.geistSemiBold(size: 38.19))
+                .tracking(-1.53)
+                .foregroundColor(.white)
+        }
+        .padding(.bottom, 5)
     }
     
     private func authButton(
@@ -96,7 +108,7 @@ struct LoginView: View {
             .font(.system(size: 12))
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
-            .padding(.top, 24)
+            .padding(.top, 8)
     }
 }
 

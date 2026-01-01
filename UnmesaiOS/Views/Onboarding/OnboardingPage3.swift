@@ -22,20 +22,22 @@ struct OnboardingPage3: View {
                 optionsList
             }
             .padding(.horizontal, 24)
-            .padding(.top, 8)
+            .padding(.top, 12)
             
             Spacer()
             
             finishButton
                 .padding(.horizontal, 24)
-                .padding(.bottom, 40)
+                .padding(.bottom, 20)
         }
     }
     
     private var titleSection: some View {
         VStack(spacing: 8) {
             Text("When should your day be judged?")
-                .font(.system(size: 26.24, weight: .semibold))
+                .font(.geistSemiBold(size: 30.5))
+                .tracking(-1.05)
+                .lineSpacing(29 - 29)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
             

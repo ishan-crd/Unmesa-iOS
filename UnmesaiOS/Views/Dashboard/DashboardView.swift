@@ -104,10 +104,11 @@ struct DashboardView: View {
                     Text("TODAY'S RULE")
                         .font(.neuePlakExtendedSemiBold(size: 14))
                         .foregroundColor(Color(hex: "4A9EFF"))
-                        .padding(.top, 32)
+                        .padding(.top, 27)
                     
                     Text("Focus on the essential.")
-                        .font(.geistSemiBold(size: 26.5))
+                        .font(.geistSemiBold(size: 28.24))
+                        .tracking(-1.05) 
                         .foregroundColor(.white)
                         .padding(.top, 8)
                     

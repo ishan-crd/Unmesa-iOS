@@ -20,16 +20,19 @@ struct LockedInView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                VStack(spacing: 32) {
+                VStack(spacing: 20) {
                     Image("lockedIn")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 300)
                     
                     VStack(spacing: 12) {
-                        (Text("You're ") +
-                         Text("LOCKED IN.").fontWeight(.bold))
-                            .font(.system(size: 26.24, weight: .semibold))
+                        (Text("You're ")
+                            .tracking(-1.05)
+                            .font(.geistSemiBold(size: 26.24)) +
+                         Text("LOCKED IN.")
+                            .font(.geistSemiBold(size: 37)))
+                            .tracking(-1.05)
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                         
@@ -62,7 +65,7 @@ struct LockedInView: View {
                 
                 gotItButton
                     .padding(.horizontal, 24)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 20)
             }
         }
     }

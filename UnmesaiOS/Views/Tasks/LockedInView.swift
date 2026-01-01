@@ -86,6 +86,7 @@ struct LockedInView: View {
     private var gotItButton: some View {
         Button {
             authManager.showWelcomeTasks = false
+            authManager.showDashboard = true
         } label: {
             Text("Got it")
                 .font(.system(size: 16, weight: .semibold))

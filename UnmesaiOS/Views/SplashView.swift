@@ -33,7 +33,10 @@ struct SplashView: View {
                 // }
                 
                 // Direct to login for now - will navigate to onboarding after login
-                if authManager.showOnboarding {
+                if authManager.showDashboard {
+                    DashboardView()
+                        .transition(.opacity)
+                } else if authManager.showOnboarding {
                     OnboardingView()
                         .environmentObject(OnboardingManager())
                         .environmentObject(authManager)

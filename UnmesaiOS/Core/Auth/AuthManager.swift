@@ -12,6 +12,7 @@ final class AuthManager: ObservableObject {
     @Published var isLoggedIn = false
     @Published var showOnboarding = false
     @Published var showWelcomeTasks = false
+    @Published var showDashboard = false
     
     init() {
         checkLoginStatus()
